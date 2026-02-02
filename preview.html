@@ -157,28 +157,139 @@
   <script>
     function generateMountainSVG(data) {
       const { mountainSnow, valleySnow, mountainElevation, valleyElevation, mountainColor, snowColor } = data;
+      const svgNS = 'http://www.w3.org/2000/svg';
 
-      return `
-        <svg 
-          viewBox="0 0 500 300" 
-          xmlns="http://www.w3.org/2000/svg"
-          style="width: 100%; height: auto; max-height: 300px;"
-          role="img"
-          aria-label="Mountain snow report visualization"
-        >
-          <g id="Snowfall" transform="translate(2.000000, 81.000000)">
-            <path id="Page-1" d="M211.483865,16 L135.799805,164.239258 L347.929688,164.239258 L299.238237,99.3686221 L259.749149,138.857349 L257.167107,134.871781 L277.710029,114.708816 L211.483865,16 Z M212.359375,29.359375 L250.58604,87.463927 L229.37207,67.8369141 L225.604998,91.8886841 L214.416016,65.5478516 L205.131836,90.3828125 L197.766602,69.4726565 L187.387695,77.2480471 L212.359375,29.359375 Z" fill="${mountainColor}" transform="translate(241.864746, 90.119629) scale(-1, 1) translate(-241.864746, -90.119629) "></path>
-            <path id="Line" d="M273.17481,18.5 L91.4057823,18.5" stroke="#999999" stroke-linecap="square"></path>
-            <path id="Line-Copy-27" d="M204.999998,114.5 L91.4057823,114.5" stroke="#999999" stroke-linecap="square"></path>
-            <circle id="Oval-19" stroke="#2F619B" stroke-width="2" fill="${snowColor}" cx="272" cy="18" r="6"></circle>
-            <path id="Oval-19-Copy" d="M204,120 C207.313708,120 210,117.313708 210,114 C210,110.686292 207.313708,108 204,108 C200.686292,108 198,110.686292 198,114 C198,117.313708 200.686292,120 204,120 Z" stroke="#2F619B" stroke-width="2" fill="${snowColor}"></path>
-            <text id="height-top" font-size="12" font-weight="normal" line-spacing="22" fill="#999999"><tspan x="90.5" y="30">${mountainElevation !== null ? `${mountainElevation}m` : '—'}</tspan></text>
-            <text id="height-valley" font-size="12" font-weight="normal" line-spacing="22" fill="#999999"><tspan x="91" y="124.5">${valleyElevation !== null ? `${valleyElevation}m` : '—'}</tspan></text>
-            <text id="snowheight-top" font-size="24" font-weight="600" fill="#424242" text-anchor="end"><tspan x="80" y="25">${mountainSnow !== null ? `${mountainSnow}cm` : '--'}</tspan></text>
-            <text id="snowheight-valley" font-size="21" font-weight="600" line-spacing="30" fill="#424242" text-anchor="end"><tspan x="79" y="120">${valleySnow !== null ? `${valleySnow}cm` : '--'}</tspan></text>
-          </g>
-        </svg>
-      `;
+      // Create root SVG element
+      const svg = document.createElementNS(svgNS, 'svg');
+      svg.setAttribute('viewBox', '0 0 500 300');
+      svg.setAttribute('xmlns', svgNS);
+      svg.setAttribute('style', 'width: 100%; height: auto; max-height: 300px;');
+      svg.setAttribute('role', 'img');
+      svg.setAttribute('aria-label', 'Mountain snow report visualization');
+
+      // Group
+      const g = document.createElementNS(svgNS, 'g');
+      g.setAttribute('id', 'Snowfall');
+      g.setAttribute('transform', 'translate(2.000000, 81.000000)');
+      svg.appendChild(g);
+
+      // Mountain path
+      const mountainPath = document.createElementNS(svgNS, 'path');
+      mountainPath.setAttribute('id', 'Page-1');
+      mountainPath.setAttribute('d', 'M211.483865,16 L135.799805,164.239258 L347.929688,164.239258 L299.238237,99.3686221 L259.749149,138.857349 L257.167107,134.871781 L277.710029,114.708816 L211.483865,16 Z M212.359375,29.359375 L250.58604,87.463927 L229.37207,67.8369141 L225.604998,91.8886841 L214.416016,65.5478516 L205.131836,90.3828125 L197.766602,69.4726565 L187.387695,77.2480471 L212.359375,29.359375 Z');
+      mountainPath.setAttribute('fill', mountainColor);
+      mountainPath.setAttribute('transform', 'translate(241.864746, 90.119629) scale(-1, 1) translate(-241.864746, -90.119629) ');
+      g.appendChild(mountainPath);
+
+      // Lines
+      const line1 = document.createElementNS(svgNS, 'path');
+      line1.setAttribute('id', 'Line');
+      line1.setAttribute('d', 'M273.17481,18.5 L91.4057823,18.5');
+      line1.setAttribute('stroke', '#999999');
+      line1.setAttribute('stroke-linecap', 'square');
+      g.appendChild(line1);
+
+      const line2 = document.createElementNS(svgNS, 'path');
+      line2.setAttribute('id', 'Line-Copy-27');
+      line2.setAttribute('d', 'M204.999998,114.5 L91.4057823,114.5');
+      line2.setAttribute('stroke', '#999999');
+      line2.setAttribute('stroke-linecap', 'square');
+      g.appendChild(line2);
+
+      // Snow markers
+      const circleTop = document.createElementNS(svgNS, 'circle');
+      circleTop.setAttribute('id', 'Oval-19');
+      circleTop.setAttribute('stroke', '#2F619B');
+      circleTop.setAttribute('stroke-width', '2');
+      circleTop.setAttribute('fill', snowColor);
+      circleTop.setAttribute('cx', '272');
+      circleTop.setAttribute('cy', '18');
+      circleTop.setAttribute('r', '6');
+      g.appendChild(circleTop);
+
+      const snowPath = document.createElementNS(svgNS, 'path');
+      snowPath.setAttribute('id', 'Oval-19-Copy');
+      snowPath.setAttribute('d', 'M204,120 C207.313708,120 210,117.313708 210,114 C210,110.686292 207.313708,108 204,108 C200.686292,108 198,110.686292 198,114 C198,117.313708 200.686292,120 204,120 Z');
+      snowPath.setAttribute('stroke', '#2F619B');
+      snowPath.setAttribute('stroke-width', '2');
+      snowPath.setAttribute('fill', snowColor);
+      g.appendChild(snowPath);
+
+      // Helper to create text with a single tspan
+      function createText(id, fontSize, fontWeight, fill, extraAttrs, tspanX, tspanY, textValue, textAnchor) {
+        const textEl = document.createElementNS(svgNS, 'text');
+        textEl.setAttribute('id', id);
+        textEl.setAttribute('font-size', String(fontSize));
+        textEl.setAttribute('font-weight', fontWeight);
+        textEl.setAttribute('fill', fill);
+        if (textAnchor) {
+          textEl.setAttribute('text-anchor', textAnchor);
+        }
+        if (extraAttrs) {
+          Object.keys(extraAttrs).forEach(function (key) {
+            textEl.setAttribute(key, extraAttrs[key]);
+          });
+        }
+        const tspan = document.createElementNS(svgNS, 'tspan');
+        tspan.setAttribute('x', String(tspanX));
+        tspan.setAttribute('y', String(tspanY));
+        tspan.textContent = textValue;
+        textEl.appendChild(tspan);
+        return textEl;
+      }
+
+      // Heights and snow amounts
+      const mountainElevationText = createText(
+        'height-top',
+        12,
+        'normal',
+        '#999999',
+        { 'line-spacing': '22' },
+        90.5,
+        30,
+        mountainElevation !== null && !Number.isNaN(mountainElevation) ? mountainElevation + 'm' : '—'
+      );
+      g.appendChild(mountainElevationText);
+
+      const valleyElevationText = createText(
+        'height-valley',
+        12,
+        'normal',
+        '#999999',
+        { 'line-spacing': '22' },
+        91,
+        124.5,
+        valleyElevation !== null && !Number.isNaN(valleyElevation) ? valleyElevation + 'm' : '—'
+      );
+      g.appendChild(valleyElevationText);
+
+      const mountainSnowText = createText(
+        'snowheight-top',
+        24,
+        '600',
+        '#424242',
+        null,
+        80,
+        25,
+        mountainSnow !== null && !Number.isNaN(mountainSnow) ? mountainSnow + 'cm' : '--',
+        'end'
+      );
+      g.appendChild(mountainSnowText);
+
+      const valleySnowText = createText(
+        'snowheight-valley',
+        21,
+        '600',
+        '#424242',
+        { 'line-spacing': '30' },
+        79,
+        120,
+        valleySnow !== null && !Number.isNaN(valleySnow) ? valleySnow + 'cm' : '--',
+        'end'
+      );
+      g.appendChild(valleySnowText);
+
+      return svg;
     }
 
     function updateSVG() {
@@ -191,7 +302,11 @@
         snowColor: document.getElementById('snowColor').value,
       };
       
-      document.getElementById('svgContainer').innerHTML = generateMountainSVG(data);
+      const container = document.getElementById('svgContainer');
+      while (container.firstChild) {
+        container.removeChild(container.firstChild);
+      }
+      container.appendChild(generateMountainSVG(data));
     }
 
     function toggleTheme() {
