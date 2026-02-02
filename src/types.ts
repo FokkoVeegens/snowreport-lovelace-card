@@ -21,7 +21,7 @@ export interface SnowReportCardConfig extends LovelaceCardConfig {
     snow_color?: string;
   };
   resort_name?: string;
-  language?: 'en' | 'nl' | 'de' | 'it' | 'fr';
+  language?: 'en' | 'nl' | 'de' | 'it' | 'fr' | 'es';
 }
 
 export interface DisplayOptions {
@@ -40,5 +40,5 @@ export const DEFAULT_DISPLAY_OPTIONS: DisplayOptions = {
   compact_mode: false,
 };
 
-export const SUPPORTED_LANGUAGES = ['en', 'nl', 'de', 'it', 'fr'] as const;
+export const SUPPORTED_LANGUAGES = ['en', 'nl', 'de', 'it', 'fr', 'es'] as const;
 export type SupportedLanguage = typeof SUPPORTED_LANGUAGES[number];

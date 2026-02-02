@@ -1,0 +1,10 @@
+{
+  "snow_depth": "Hauteur de neige",
+  "elevation": "Altitude",
+  "last_update": "Dernière mise à jour",
+  "mountain": "Montagne",
+  "valley": "Vallée",
+  "forecast_5d": "Prévision 5 jours",
+  "snowfall_24h": "Chute de neige (24 dernières heures)",
+  "unavailable": "indisponible"
+}

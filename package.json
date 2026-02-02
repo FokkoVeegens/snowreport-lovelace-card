@@ -10,6 +10,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c --watch",
+    "watch": "rollup -c --watch",
     "lint": "eslint . --ext .ts,.js"
   },
   "dependencies": {
@@ -22,6 +23,7 @@
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-commonjs": "^25.0.0",
     "@rollup/plugin-terser": "^0.4.0",
+    "@rollup/plugin-json": "^6.0.0",
     "rollup-plugin-typescript2": "^0.34.1",
     "rollup-plugin-serve": "^1.1.0",
     "rollup-plugin-livereload": "^2.0.0"
