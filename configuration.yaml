@@ -1,0 +1,131 @@
+scrape:
+  - resource: https://www.sneeuwhoogte.nl/overzicht/itali%C3%AB/zuid-tirol/sextner-dolomiten/sexten-sesto
+    scan_interval: 3600
+    sensor:
+      - name: "Sexten Berg Sneeuwhoogte Raw"
+        select: "h2.summary_card__heights span.summary-card__label:contains('Berg') + span"
+
+      - name: "Sexten Dal Sneeuwhoogte Raw"
+        select: "h2.summary_card__heights span.summary-card__label:contains('Dal') + span"
+
+      - name: "Sexten Laatste Sneeuwval Raw"
+        select: "tr th:contains('Laatste sneeuwval') + td"
+
+      - name: "Sexten Sneeuwval Laatste 24u Raw"
+        select: "tr th:contains('Laatste 24') + td"
+    
+      - name: "Sexten Hoogte Raw"
+        select: "div.entry-header h6"
+  - resource: https://www.sneeuwhoogte.nl/overzicht/itali%C3%AB/zuid-tirol/sextner-dolomiten/sexten-sesto/weer
+    scan_interval: 3600
+    sensor:
+      - name: "Sexten Verwachting Berg Sneeuw Raw"
+        select: ".forecast__footer-value"
+        index: 0
+
+      - name: "Sexten Verwachting Berg Regen Raw"
+        select: ".forecast__footer-value"
+        index: 1
+
+      - name: "Sexten Verwachting Dal Sneeuw Raw"
+        select: ".forecast__footer-value"
+        index: 2
+
+      - name: "Sexten Verwachting Dal Regen Raw"
+        select: ".forecast__footer-value"
+        index: 3
+
+template:
+  - sensor:
+      - name: "Sexten Berg Sneeuwhoogte"
+        unit_of_measurement: "cm"
+        state_class: measurement
+        state: >
+            {% set v = states('sensor.sexten_berg_sneeuwhoogte_raw') %}
+            {% if v not in ('unknown', 'unavailable', '') %}
+              {% set nums = v | regex_findall('\d+') %}
+              {{ nums[0] if nums | length > 0 else 0 }}
+            {% else %}
+              0
+            {% endif %}
+
+      - name: "Sexten Dal Sneeuwhoogte"
+        unit_of_measurement: "cm"
+        state_class: measurement
+        state: >
+          {% set v = states('sensor.sexten_dal_sneeuwhoogte_raw') %}
+          {% if v not in ('unknown', 'unavailable', '') %}
+            {% set nums = v | regex_findall('\d+') %}
+            {{ nums[0] if nums | length > 0 else 0 }}
+          {% else %}
+            0
+          {% endif %}
+
+      - name: "Sexten Sneeuwval Laatste 24u"
+        unit_of_measurement: "cm"
+        state_class: measurement
+        state: >
+          {% set v = states('sensor.sexten_sneeuwval_laatste_24u_raw') %}
+          {% if v not in ('unknown', 'unavailable', '') %}
+            {% set nums = v | regex_findall('\d+') %}
+            {{ nums[0] if nums | length > 0 else 0 }}
+          {% else %}
+            0
+          {% endif %}
+
+      - name: "Sexten Verwachte Sneeuw Berg (5d)"
+        unit_of_measurement: "cm"
+        state_class: measurement
+        state: >
+          {% set v = states('sensor.sexten_verwachting_berg_sneeuw_raw') %}
+          {% set nums = v | regex_findall('\d+') %}
+          {{ nums[0] if nums | length > 0 else 0 }}
+
+      - name: "Sexten Verwachte Regen Berg (5d)"
+        unit_of_measurement: "mm"
+        state_class: measurement
+        state: >
+          {% set v = states('sensor.sexten_verwachting_berg_regen_raw') %}
+          {% set nums = v | regex_findall('\d+') %}
+          {{ nums[0] if nums | length > 0 else 0 }}
+
+      - name: "Sexten Verwachte Sneeuw Dal (5d)"
+        unit_of_measurement: "cm"
+        state_class: measurement
+        state: >
+          {% set v = states('sensor.sexten_verwachting_dal_sneeuw_raw') %}
+          {% set nums = v | regex_findall('\d+') %}
+          {{ nums[0] if nums | length > 0 else 0 }}
+
+      - name: "Sexten Verwachte Regen Dal (5d)"
+        unique_id: "sneeuwhoogte_verwachting_regen_dal"
+        unit_of_measurement: "mm"
+        state_class: measurement
+        state: >
+          {% set v = states('sensor.sexten_verwachting_dal_regen_raw') %}
+          {% set nums = v | regex_findall('\d+') %}
+          {{ nums[0] if nums | length > 0 else 0 }}
+
+      - name: "Sexten Hoogte Dal"
+        unit_of_measurement: "m"
+        state_class: measurement
+        state: >
+          {% set v = states('sensor.sexten_hoogte_raw') %}
+          {% if v not in ('unknown', 'unavailable', '') %}
+            {% set nums = v | regex_findall('\d+') %}
+            {{ nums[0] if nums | length > 0 else 0 }}
+          {% else %}
+            0
+          {% endif %}
+          
+      - name: "Sexten Hoogte Berg"
+        unit_of_measurement: "m"
+        state_class: measurement
+        state: >
+          {% set v = states('sensor.sexten_hoogte_raw') %}
+          {% if v not in ('unknown', 'unavailable', '') %}
+            {% set nums = v | regex_findall('\d+') %}
+            {{ nums[1] if nums | length > 1 else 0 }}
+          {% else %}
+            0
+          {% endif %}
