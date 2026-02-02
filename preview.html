@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snow Report Mountain SVG Preview</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .card {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+    h1 {
+      color: #333;
+      margin-top: 0;
+    }
+    h2 {
+      color: #666;
+      font-size: 18px;
+      margin-top: 30px;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 10px;
+    }
+    .last-update {
+      font-size: 12px;
+      color: #999;
+      text-align: right;
+      margin-bottom: 10px;
+    }
+    svg {
+      display: block;
+      margin: 0 auto;
+    }
+    .controls {
+      margin-top: 20px;
+      padding: 15px;
+      background: #f9f9f9;
+      border-radius: 4px;
+    }
+    .control-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: inline-block;
+      width: 180px;
+      font-weight: 600;
+      color: #555;
+    }
+    input[type="number"] {
+      width: 100px;
+      padding: 5px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    input[type="color"] {
+      width: 60px;
+      height: 30px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .theme-toggle {
+      margin: 20px 0;
+      text-align: center;
+    }
+    button {
+      padding: 10px 20px;
+      background: #03a9f4;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    button:hover {
+      background: #0288d1;
+    }
+    body.dark {
+      background: #1a1a1a;
+      color: #e0e0e0;
+    }
+    body.dark .card {
+      background: #2c2c2c;
+    }
+    body.dark h1, body.dark h2 {
+      color: #e0e0e0;
+    }
+    body.dark .controls {
+      background: #333;
+    }
+    body.dark svg text {
+      fill: #e0e0e0;
+    }
+    body.dark svg line,
+    body.dark svg circle {
+      stroke: #e0e0e0;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Snow Report Mountain Graphic Preview</h1>
+    <p>This is a preview of the SVG mountain visualization for the Home Assistant Lovelace card.</p>
+    
+    <div class="theme-toggle">
+      <button onclick="toggleTheme()">Toggle Dark/Light Theme</button>
+    </div>
+
+    <div class="controls">
+      <h2>Adjust Values</h2>
+      
+      <div class="control-group">
+        <label>Mountain Snow (cm):</label>
+        <input type="number" id="mountainSnow" value="80" min="0" max="500" onchange="updateSVG()">
+      </div>
+      
+      <div class="control-group">
+        <label>Valley Snow (cm):</label>
+        <input type="number" id="valleySnow" value="40" min="0" max="500" onchange="updateSVG()">
+      </div>
+      
+      <div class="control-group">
+        <label>Mountain Elevation (m):</label>
+        <input type="number" id="mountainElevation" value="2225" min="0" max="5000" onchange="updateSVG()">
+      </div>
+      
+      <div class="control-group">
+        <label>Valley Elevation (m):</label>
+        <input type="number" id="valleyElevation" value="1130" min="0" max="5000" onchange="updateSVG()">
+      </div>
+      
+      <div class="control-group">
+        <label>Mountain Color:</label>
+        <input type="color" id="mountainColor" value="#D3D3D3" onchange="updateSVG()">
+      </div>
+      
+      <div class="control-group">
+        <label>Snow Color:</label>
+        <input type="color" id="snowColor" value="#FFFFFF" onchange="updateSVG()">
+      </div>
+    </div>
+
+    <h2>Preview</h2>
+    <div class="last-update">laatste update: 1 februari 2026</div>
+    <div id="svgContainer"></div>
+  </div>
+
+  <script>
+    function generateMountainSVG(data) {
+      const { mountainSnow, valleySnow, mountainElevation, valleyElevation, mountainColor, snowColor } = data;
+
+      return `
+        <svg 
+          viewBox="0 0 500 300" 
+          xmlns="http://www.w3.org/2000/svg"
+          style="width: 100%; height: auto; max-height: 300px;"
+          role="img"
+          aria-label="Mountain snow report visualization"
+        >
+          <g id="Snowfall" transform="translate(2.000000, 81.000000)">
+            <path id="Page-1" d="M211.483865,16 L135.799805,164.239258 L347.929688,164.239258 L299.238237,99.3686221 L259.749149,138.857349 L257.167107,134.871781 L277.710029,114.708816 L211.483865,16 Z M212.359375,29.359375 L250.58604,87.463927 L229.37207,67.8369141 L225.604998,91.8886841 L214.416016,65.5478516 L205.131836,90.3828125 L197.766602,69.4726565 L187.387695,77.2480471 L212.359375,29.359375 Z" fill="${mountainColor}" transform="translate(241.864746, 90.119629) scale(-1, 1) translate(-241.864746, -90.119629) "></path>
+            <path id="Line" d="M273.17481,18.5 L91.4057823,18.5" stroke="#999999" stroke-linecap="square"></path>
+            <path id="Line-Copy-27" d="M204.999998,114.5 L91.4057823,114.5" stroke="#999999" stroke-linecap="square"></path>
+            <circle id="Oval-19" stroke="#2F619B" stroke-width="2" fill="${snowColor}" cx="272" cy="18" r="6"></circle>
+            <path id="Oval-19-Copy" d="M204,120 C207.313708,120 210,117.313708 210,114 C210,110.686292 207.313708,108 204,108 C200.686292,108 198,110.686292 198,114 C198,117.313708 200.686292,120 204,120 Z" stroke="#2F619B" stroke-width="2" fill="${snowColor}"></path>
+            <text id="height-top" font-size="12" font-weight="normal" line-spacing="22" fill="#999999"><tspan x="90.5" y="30">${mountainElevation !== null ? `${mountainElevation}m` : '—'}</tspan></text>
+            <text id="height-valley" font-size="12" font-weight="normal" line-spacing="22" fill="#999999"><tspan x="91" y="124.5">${valleyElevation !== null ? `${valleyElevation}m` : '—'}</tspan></text>
+            <text id="snowheight-top" font-size="24" font-weight="600" fill="#424242" text-anchor="end"><tspan x="80" y="25">${mountainSnow !== null ? `${mountainSnow}cm` : '--'}</tspan></text>
+            <text id="snowheight-valley" font-size="21" font-weight="600" line-spacing="30" fill="#424242" text-anchor="end"><tspan x="79" y="120">${valleySnow !== null ? `${valleySnow}cm` : '--'}</tspan></text>
+          </g>
+        </svg>
+      `;
+    }
+
+    function updateSVG() {
+      const data = {
+        mountainSnow: parseInt(document.getElementById('mountainSnow').value),
+        valleySnow: parseInt(document.getElementById('valleySnow').value),
+        mountainElevation: parseInt(document.getElementById('mountainElevation').value),
+        valleyElevation: parseInt(document.getElementById('valleyElevation').value),
+        mountainColor: document.getElementById('mountainColor').value,
+        snowColor: document.getElementById('snowColor').value,
+      };
+      
+      document.getElementById('svgContainer').innerHTML = generateMountainSVG(data);
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+      updateSVG();
+    }
+
+    // Initialize
+    updateSVG();
+  </script>
+</body>
+</html>

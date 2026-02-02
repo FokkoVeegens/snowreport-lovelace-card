@@ -1,0 +1,7 @@
+{
+  "name": "Snow Report Lovelace Card",
+  "content": "lovelace",
+  "render_readme": true,
+  "channels": ["stable"],
+  "filename": "snowreport-card.js"
+}
