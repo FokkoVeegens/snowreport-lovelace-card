@@ -37,8 +37,10 @@ The dev server runs on `http://localhost:10001` and watches for file changes wit
 
 ```
 snowreport-lovelace-card/
+├── docs/
+│   ├── configuration.yaml       # Example sensor configuration
 ├── src/
-│   ├── snowreport-card.ts      # Main card component
+│   ├── snowreport-card.ts       # Main card component
 │   ├── editor.ts                # Visual configuration editor
 │   ├── types.ts                 # TypeScript interfaces
 │   ├── styles.ts                # CSS styles
@@ -49,7 +51,6 @@ snowreport-lovelace-card/
 │       ├── svg-mountain.ts      # SVG mountain graphic generator
 │       └── ha-helper.ts         # Home Assistant helper functions
 ├── dist/                        # Build output (generated)
-├── configuration.yaml           # Example sensor configuration
 ├── preview.html                 # SVG preview without HA
 └── package.json
 ```
