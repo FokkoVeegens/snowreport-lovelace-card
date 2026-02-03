@@ -2,14 +2,15 @@
   "name": "snowreport-lovelace-card",
   "type": "module",
   "version": "0.1.0",
-  "description": "Lovelace card showing ski resort snow reports with a mountain SVG visualization",
-  "author": "",
-  "license": "MIT",
+  "description": "Lovelace card showing ski resort snow reports, based on data from sneeuwhoogte.nl",
+  "author": "Fokko Veegens",
+  "license": "GPL-3.0-only",
   "main": "dist/snowreport-card.js",
   "module": "dist/snowreport-card.js",
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c --watch",
+    "watch": "rollup -c --watch",
     "lint": "eslint . --ext .ts,.js"
   },
   "dependencies": {
@@ -19,9 +20,10 @@
   "devDependencies": {
     "typescript": "^4.9.5",
     "rollup": "^3.28.0",
-    "@rollup/plugin-node-resolve": "^15.0.1",
-    "@rollup/plugin-commonjs": "^25.0.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-commonjs": "^29.0.0",
     "@rollup/plugin-terser": "^0.4.0",
+    "@rollup/plugin-json": "^6.0.0",
     "rollup-plugin-typescript2": "^0.34.1",
     "rollup-plugin-serve": "^1.1.0",
     "rollup-plugin-livereload": "^2.0.0"

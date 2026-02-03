@@ -1,0 +1,10 @@
+{
+  "snow_depth": "Schneehöhe",
+  "elevation": "Höhe",
+  "last_update": "Zuletzt aktualisiert",
+  "mountain": "Berg",
+  "valley": "Tal",
+  "forecast_5d": "5-Tage-Vorhersage",
+  "snowfall_24h": "Neuschnee (letzte 24 Stunden)",
+  "unavailable": "nicht verfügbar"
+}

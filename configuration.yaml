@@ -1,47 +1,39 @@
 scrape:
-  - resource: https://www.sneeuwhoogte.nl/overzicht/itali%C3%AB/zuid-tirol/sextner-dolomiten/sexten-sesto
+  - resource: https://www.sneeuwhoogte.nl/overzicht/frankrijk/savoie/espace-killy/tignes
     scan_interval: 3600
     sensor:
-      - name: "Sexten Berg Sneeuwhoogte Raw"
+      - name: "Resort Mountain Snow Depth Raw"
         select: "h2.summary_card__heights span.summary-card__label:contains('Berg') + span"
 
-      - name: "Sexten Dal Sneeuwhoogte Raw"
+      - name: "Resort Valley Snow Depth Raw"
         select: "h2.summary_card__heights span.summary-card__label:contains('Dal') + span"
 
-      - name: "Sexten Laatste Sneeuwval Raw"
+      - name: "Resort Last Snowfall Raw"
         select: "tr th:contains('Laatste sneeuwval') + td"
 
-      - name: "Sexten Sneeuwval Laatste 24u Raw"
+      - name: "Resort Snowfall Last 24h Raw"
         select: "tr th:contains('Laatste 24') + td"
     
-      - name: "Sexten Hoogte Raw"
+      - name: "Resort Elevation Raw"
         select: "div.entry-header h6"
-  - resource: https://www.sneeuwhoogte.nl/overzicht/itali%C3%AB/zuid-tirol/sextner-dolomiten/sexten-sesto/weer
+  - resource: https://www.sneeuwhoogte.nl/overzicht/frankrijk/savoie/espace-killy/tignes/weer
     scan_interval: 3600
     sensor:
-      - name: "Sexten Verwachting Berg Sneeuw Raw"
+      - name: "Resort Forecast Mountain Snow Raw"
         select: ".forecast__footer-value"
         index: 0
 
-      - name: "Sexten Verwachting Berg Regen Raw"
-        select: ".forecast__footer-value"
-        index: 1
-
-      - name: "Sexten Verwachting Dal Sneeuw Raw"
+      - name: "Resort Forecast Valley Snow Raw"
         select: ".forecast__footer-value"
         index: 2
 
-      - name: "Sexten Verwachting Dal Regen Raw"
-        select: ".forecast__footer-value"
-        index: 3
-
 template:
   - sensor:
-      - name: "Sexten Berg Sneeuwhoogte"
+      - name: "Resort Mountain Snow Depth"
         unit_of_measurement: "cm"
         state_class: measurement
         state: >
-            {% set v = states('sensor.sexten_berg_sneeuwhoogte_raw') %}
+            {% set v = states('sensor.resort_mountain_snow_depth_raw') %}
             {% if v not in ('unknown', 'unavailable', '') %}
               {% set nums = v | regex_findall('\d+') %}
               {{ nums[0] if nums | length > 0 else 0 }}
@@ -49,11 +41,11 @@ template:
               0
             {% endif %}
 
-      - name: "Sexten Dal Sneeuwhoogte"
+      - name: "Resort Valley Snow Depth"
         unit_of_measurement: "cm"
         state_class: measurement
         state: >
-          {% set v = states('sensor.sexten_dal_sneeuwhoogte_raw') %}
+          {% set v = states('sensor.resort_valley_snow_depth_raw') %}
           {% if v not in ('unknown', 'unavailable', '') %}
             {% set nums = v | regex_findall('\d+') %}
             {{ nums[0] if nums | length > 0 else 0 }}
@@ -61,11 +53,11 @@ template:
             0
           {% endif %}
 
-      - name: "Sexten Sneeuwval Laatste 24u"
+      - name: "Resort Snowfall Last 24h"
         unit_of_measurement: "cm"
         state_class: measurement
         state: >
-          {% set v = states('sensor.sexten_sneeuwval_laatste_24u_raw') %}
+          {% set v = states('sensor.resort_snowfall_last_24h_raw') %}
           {% if v not in ('unknown', 'unavailable', '') %}
             {% set nums = v | regex_findall('\d+') %}
             {{ nums[0] if nums | length > 0 else 0 }}
@@ -73,44 +65,27 @@ template:
             0
           {% endif %}
 
-      - name: "Sexten Verwachte Sneeuw Berg (5d)"
+      - name: "Resort Forecast Mountain Snow (5d)"
         unit_of_measurement: "cm"
         state_class: measurement
         state: >
-          {% set v = states('sensor.sexten_verwachting_berg_sneeuw_raw') %}
+          {% set v = states('sensor.resort_forecast_mountain_snow_raw') %}
           {% set nums = v | regex_findall('\d+') %}
           {{ nums[0] if nums | length > 0 else 0 }}
 
-      - name: "Sexten Verwachte Regen Berg (5d)"
-        unit_of_measurement: "mm"
-        state_class: measurement
-        state: >
-          {% set v = states('sensor.sexten_verwachting_berg_regen_raw') %}
-          {% set nums = v | regex_findall('\d+') %}
-          {{ nums[0] if nums | length > 0 else 0 }}
-
-      - name: "Sexten Verwachte Sneeuw Dal (5d)"
+      - name: "Resort Forecast Valley Snow (5d)"
         unit_of_measurement: "cm"
         state_class: measurement
         state: >
-          {% set v = states('sensor.sexten_verwachting_dal_sneeuw_raw') %}
+          {% set v = states('sensor.resort_forecast_valley_snow_raw') %}
           {% set nums = v | regex_findall('\d+') %}
           {{ nums[0] if nums | length > 0 else 0 }}
 
-      - name: "Sexten Verwachte Regen Dal (5d)"
-        unique_id: "sneeuwhoogte_verwachting_regen_dal"
-        unit_of_measurement: "mm"
-        state_class: measurement
-        state: >
-          {% set v = states('sensor.sexten_verwachting_dal_regen_raw') %}
-          {% set nums = v | regex_findall('\d+') %}
-          {{ nums[0] if nums | length > 0 else 0 }}
-
-      - name: "Sexten Hoogte Dal"
+      - name: "Resort Valley Elevation"
         unit_of_measurement: "m"
         state_class: measurement
         state: >
-          {% set v = states('sensor.sexten_hoogte_raw') %}
+          {% set v = states('sensor.resort_elevation_raw') %}
           {% if v not in ('unknown', 'unavailable', '') %}
             {% set nums = v | regex_findall('\d+') %}
             {{ nums[0] if nums | length > 0 else 0 }}
@@ -118,11 +93,11 @@ template:
             0
           {% endif %}
           
-      - name: "Sexten Hoogte Berg"
+      - name: "Resort Mountain Elevation"
         unit_of_measurement: "m"
         state_class: measurement
         state: >
-          {% set v = states('sensor.sexten_hoogte_raw') %}
+          {% set v = states('sensor.resort_elevation_raw') %}
           {% if v not in ('unknown', 'unavailable', '') %}
             {% set nums = v | regex_findall('\d+') %}
             {{ nums[1] if nums | length > 1 else 0 }}
