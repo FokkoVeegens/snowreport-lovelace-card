@@ -141,7 +141,7 @@ This card requires sensor entities that provide snow depth data. Since most ski 
 
 #### Step 2: Create Scrape Sensors
 
-| Note: replace `[Resort]` with your resort name and `[your-resort-url]` with the URL slug from https://www.sneeuwhoogte.nl.
+> Note: replace `[Resort]` with your resort name and `[your-resort-url]` with the URL slug from https://www.sneeuwhoogte.nl.
 
 Add to your `configuration.yaml`:
 
@@ -165,7 +165,7 @@ scrape:
 
 For forecast data, add a second scrape entry with `/weer` appended:
 
-| Note: don't repeat `scrape:`; just add another item to the existing list.
+> Note: don't repeat `scrape:`; just add another item to the existing list.
 
 ```yaml
 scrape:
@@ -212,7 +212,7 @@ template:
           {% endif %}
 ```
 
-**Note:** See [configuration.yaml](docs/configuration.yaml) for a complete working example using the Tignes resort.
+> Note: See [configuration.yaml](docs/configuration.yaml) for a complete working example using the Tignes resort.
 
 ### Troubleshooting Sensors
 
