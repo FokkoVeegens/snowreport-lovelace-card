@@ -2,9 +2,9 @@
   "name": "snowreport-lovelace-card",
   "type": "module",
   "version": "0.1.0",
-  "description": "Lovelace card showing ski resort snow reports with a mountain SVG visualization",
-  "author": "",
-  "license": "MIT",
+  "description": "Lovelace card showing ski resort snow reports, based on data from sneeuwhoogte.nl",
+  "author": "Fokko Veegens",
+  "license": "GPL-3.0-only",
   "main": "dist/snowreport-card.js",
   "module": "dist/snowreport-card.js",
   "scripts": {
