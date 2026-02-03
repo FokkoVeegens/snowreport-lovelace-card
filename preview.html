@@ -247,7 +247,7 @@
         { 'line-spacing': '22' },
         90.5,
         30,
-        mountainElevation !== null && !Number.isNaN(mountainElevation) ? mountainElevation + 'm' : '—'
+        mountainElevation !== null ? mountainElevation + 'm' : '—'
       );
       g.appendChild(mountainElevationText);
 
@@ -259,7 +259,7 @@
         { 'line-spacing': '22' },
         91,
         124.5,
-        valleyElevation !== null && !Number.isNaN(valleyElevation) ? valleyElevation + 'm' : '—'
+        valleyElevation !== null ? valleyElevation + 'm' : '—'
       );
       g.appendChild(valleyElevationText);
 
@@ -271,7 +271,7 @@
         null,
         80,
         25,
-        mountainSnow !== null && !Number.isNaN(mountainSnow) ? mountainSnow + 'cm' : '--',
+        mountainSnow !== null ? mountainSnow + 'cm' : '--',
         'end'
       );
       g.appendChild(mountainSnowText);
@@ -284,7 +284,7 @@
         { 'line-spacing': '30' },
         79,
         120,
-        valleySnow !== null && !Number.isNaN(valleySnow) ? valleySnow + 'cm' : '--',
+        valleySnow !== null ? valleySnow + 'cm' : '--',
         'end'
       );
       g.appendChild(valleySnowText);
