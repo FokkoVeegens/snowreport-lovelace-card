@@ -8,5 +8,12 @@
   "forecast_5d": "Pronóstico 5 días",
   "snowfall_24h": "Nevadas (últimas 24 horas)",
   "unavailable": "no disponible",
-  "snow_conditions": "condiciones de nieve"
+  "snow_conditions": "condiciones de nieve",
+  "today": "Hoy",
+  "yesterday": "Ayer",
+  "days_ago": "Hace {n} días",
+  "about_week_ago": "Hace aproximadamente una semana",
+  "about_weeks_ago": "Hace aproximadamente {n} semanas",
+  "about_month_ago": "Hace aproximadamente un mes",
+  "about_months_ago": "Hace aproximadamente {n} meses"
 }

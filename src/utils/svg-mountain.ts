@@ -64,7 +64,7 @@ export function generateMountainSVG(
         <circle id="Oval-19" stroke="#2F619B" stroke-width="2" fill="${snowColor}" cx="272" cy="18" r="6"></circle>
         <path id="Oval-19-Copy" d="M204,120 C207.313708,120 210,117.313708 210,114 C210,110.686292 207.313708,108 204,108 C200.686292,108 198,110.686292 198,114 C198,117.313708 200.686292,120 204,120 Z" stroke="#2F619B" stroke-width="2" fill="${snowColor}"></path>
         <text id="height-top" font-size="12" font-weight="normal" line-spacing="22" fill="#999999"><tspan x="90.5" y="30">${mountainElevation !== null ? `${mountainElevation}m` : '—'}</tspan></text>
-        <text id="height-valley" font-size="12" font-weight="normal" line-spacing="22" fill="#999999"><tspan x="91" y="126">${valleyElevation !== null ? `${valleyElevation}m` : '—'}</tspan></text>
+        <text id="height-valley" font-size="12" font-weight="normal" line-spacing="22" fill="#999999"><tspan x="91" y="127">${valleyElevation !== null ? `${valleyElevation}m` : '—'}</tspan></text>
         <text id="snowheight-top" font-size="24" font-weight="600" fill="#424242" text-anchor="end"><tspan x="80" y="25">${mountainSnow !== null ? `${mountainSnow}cm` : '--'}</tspan></text>
         <text id="snowheight-valley" font-size="21" font-weight="600" line-spacing="30" fill="#424242" text-anchor="end"><tspan x="79" y="120">${valleySnow !== null ? `${valleySnow}cm` : '--'}</tspan></text>
       </g>

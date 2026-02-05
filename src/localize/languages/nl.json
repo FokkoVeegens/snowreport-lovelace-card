@@ -8,5 +8,12 @@
   "forecast_5d": "5-daagse voorspelling",
   "snowfall_24h": "Sneeuwval (laatste 24 uur)",
   "unavailable": "niet beschikbaar",
-  "snow_conditions": "sneeuwcondities"
+  "snow_conditions": "sneeuwcondities",
+  "today": "Vandaag",
+  "yesterday": "Gisteren",
+  "days_ago": "{n} dagen geleden",
+  "about_week_ago": "Ongeveer een week geleden",
+  "about_weeks_ago": "Ongeveer {n} weken geleden",
+  "about_month_ago": "Ongeveer een maand geleden",
+  "about_months_ago": "Ongeveer {n} maanden geleden"
 }

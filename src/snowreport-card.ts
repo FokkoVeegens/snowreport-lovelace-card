@@ -193,7 +193,7 @@ class SnowReportCard extends LitElement {
     return st.state;
   }
 
-  private _formatRelativeDate(timestamp: string | null): string {
+  private _formatRelativeDate(timestamp: string | null, lang: string): string {
     if (!timestamp) return '';
     
     try {
@@ -210,21 +210,21 @@ class SnowReportCard extends LitElement {
       const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
       
       if (diffDays === 0) {
-        return 'Today';
+        return localize('today', lang);
       } else if (diffDays === 1) {
-        return 'Yesterday';
+        return localize('yesterday', lang);
       } else if (diffDays < 7) {
-        return `${diffDays} days ago`;
+        return localize('days_ago', lang).replace('{n}', diffDays.toString());
       } else if (diffDays < 14) {
-        return 'About a week ago';
+        return localize('about_week_ago', lang);
       } else if (diffDays < 30) {
         const weeks = Math.floor(diffDays / 7);
-        return `About ${weeks} weeks ago`;
+        return localize('about_weeks_ago', lang).replace('{n}', weeks.toString());
       } else if (diffDays < 60) {
-        return 'About a month ago';
+        return localize('about_month_ago', lang);
       } else {
         const months = Math.floor(diffDays / 30);
-        return `About ${months} months ago`;
+        return localize('about_months_ago', lang).replace('{n}', months.toString());
       }
     } catch (e) {
       return '';
@@ -265,12 +265,14 @@ class SnowReportCard extends LitElement {
       }
     }
     
-    const relativeDate = this._formatRelativeDate(lastSnowfallDate) || localize('unavailable', lang);
+    const relativeDate = this._formatRelativeDate(lastSnowfallDate, lang) || localize('unavailable', lang);
     const snowfall24 = this._getEntityState(cfg.entities.snowfall_24h);
     
     // Combine snowfall amount with relative date if it's Today or Yesterday
+    const todayText = localize('today', lang);
+    const yesterdayText = localize('yesterday', lang);
     let lastSnowfallText = relativeDate;
-    if ((relativeDate === 'Today' || relativeDate === 'Yesterday') && snowfall24 && !isNaN(Number(snowfall24))) {
+    if ((relativeDate === todayText || relativeDate === yesterdayText) && snowfall24 && !isNaN(Number(snowfall24))) {
       lastSnowfallText = `${relativeDate} (${snowfall24}cm)`;
     }
     
@@ -296,7 +298,7 @@ class SnowReportCard extends LitElement {
               <div class="forecast-section">
                 <div>❄️ ${lastSnowfallLabel}: ${lastSnowfallText}</div>
                 <div class="combined-forecast">
-                  ❄️ 5d Forecast: 🏔️ ${forecastMountain && !isNaN(Number(forecastMountain)) ? forecastMountain + 'cm' : '-'} 🏘️ ${forecastValley && !isNaN(Number(forecastValley)) ? forecastValley + 'cm' : '-'}
+                  ❄️ ${localize('forecast_5d', lang)}: 🏔️ ${forecastMountain && !isNaN(Number(forecastMountain)) ? forecastMountain + 'cm' : '-'} 🏘️ ${forecastValley && !isNaN(Number(forecastValley)) ? forecastValley + 'cm' : '-'}
                 </div>
                 
               </div>

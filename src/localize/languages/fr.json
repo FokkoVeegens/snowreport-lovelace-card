@@ -8,5 +8,12 @@
   "forecast_5d": "Prévision 5 jours",
   "snowfall_24h": "Chute de neige (24 dernières heures)",
   "unavailable": "indisponible",
-  "snow_conditions": "conditions de neige"
+  "snow_conditions": "conditions de neige",
+  "today": "Aujourd'hui",
+  "yesterday": "Hier",
+  "days_ago": "Il y a {n} jours",
+  "about_week_ago": "Il y a environ une semaine",
+  "about_weeks_ago": "Il y a environ {n} semaines",
+  "about_month_ago": "Il y a environ un mois",
+  "about_months_ago": "Il y a environ {n} mois"
 }
