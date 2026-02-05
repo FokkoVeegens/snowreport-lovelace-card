@@ -265,14 +265,21 @@ class SnowReportCard extends LitElement {
       }
     }
     
-    const lastSnowfallText = this._formatRelativeDate(lastSnowfallDate) || localize('unavailable', lang);
+    const relativeDate = this._formatRelativeDate(lastSnowfallDate) || localize('unavailable', lang);
+    const snowfall24 = this._getEntityState(cfg.entities.snowfall_24h);
+    
+    // Combine snowfall amount with relative date if it's Today or Yesterday
+    let lastSnowfallText = relativeDate;
+    if ((relativeDate === 'Today' || relativeDate === 'Yesterday') && snowfall24 && !isNaN(Number(snowfall24))) {
+      lastSnowfallText = `${relativeDate} (${snowfall24}cm)`;
+    }
+    
     const lastSnowfallLabel = localize('last_snowfall', lang);
 
     // Forecast display
     const showForecast = cfg.display_options?.show_forecast ?? true;
     const forecastMountain = this._getEntityState(cfg.entities.forecast_mountain_snow);
     const forecastValley = this._getEntityState(cfg.entities.forecast_valley_snow);
-    const snowfall24 = this._getEntityState(cfg.entities.snowfall_24h);
 
     const compact = cfg.display_options?.compact_mode ?? false;
 
@@ -284,12 +291,11 @@ class SnowReportCard extends LitElement {
           ${cfg.display_options?.show_mountain_graphic === false ? html`` : generateMountainSVG(cfg, data)}
         </div>
 
-        ${showForecast && (forecastMountain || forecastValley || snowfall24)
+        ${showForecast && (forecastMountain || forecastValley)
           ? html`
               <div class="forecast-section">
                 ${forecastMountain ? html`<div>${localize('mountain', lang)}: ${forecastMountain}${isNaN(Number(forecastMountain)) ? '' : 'cm'}</div>` : ''}
                 ${forecastValley ? html`<div>${localize('valley', lang)}: ${forecastValley}${isNaN(Number(forecastValley)) ? '' : 'cm'}</div>` : ''}
-                ${snowfall24 ? html`<div>${localize('snowfall_24h', lang)}: ${snowfall24}${isNaN(Number(snowfall24)) ? '' : 'cm'}</div>` : ''}
                 <div>${lastSnowfallLabel}: ${lastSnowfallText}</div>
               </div>
             `
