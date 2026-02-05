@@ -7,5 +7,6 @@
   "valley": "Tal",
   "forecast_5d": "5-Tage-Vorhersage",
   "snowfall_24h": "Neuschnee (letzte 24 Stunden)",
-  "unavailable": "nicht verfügbar"
+  "unavailable": "nicht verfügbar",
+  "snow_conditions": "Schneebedingungen"
 }

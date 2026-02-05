@@ -7,5 +7,6 @@
   "valley": "Valley",
   "forecast_5d": "5-day forecast",
   "snowfall_24h": "Snowfall (last 24 hours)",
-  "unavailable": "unavailable"
+  "unavailable": "unavailable",
+  "snow_conditions": "snow conditions"
 }

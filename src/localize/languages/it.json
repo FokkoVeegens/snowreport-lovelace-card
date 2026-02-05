@@ -7,5 +7,6 @@
   "valley": "Valle",
   "forecast_5d": "Previsioni 5 giorni",
   "snowfall_24h": "Nevicate (ultime 24 ore)",
-  "unavailable": "non disponibile"
+  "unavailable": "non disponibile",
+  "snow_conditions": "condizioni della neve"
 }

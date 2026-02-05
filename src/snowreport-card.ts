@@ -278,7 +278,7 @@ class SnowReportCard extends LitElement {
 
     return html`
       <ha-card class=${compact ? 'compact' : ''}>
-        ${cfg.resort_name ? html`<h1 class="card-header"><div class="name">${cfg.resort_name}</div></h1>` : ''}
+        ${cfg.resort_name ? html`<h1 class="card-header"><div class="name">${cfg.resort_name} ${localize('snow_conditions', lang)}</div></h1>` : ''}
         <div class="card-content">
         <div>
           ${cfg.display_options?.show_mountain_graphic === false ? html`` : generateMountainSVG(cfg, data)}

@@ -7,5 +7,6 @@
   "valley": "Dal",
   "forecast_5d": "5-daagse voorspelling",
   "snowfall_24h": "Sneeuwval (laatste 24 uur)",
-  "unavailable": "niet beschikbaar"
+  "unavailable": "niet beschikbaar",
+  "snow_conditions": "sneeuwcondities"
 }
