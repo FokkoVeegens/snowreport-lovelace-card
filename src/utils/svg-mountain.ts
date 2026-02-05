@@ -51,13 +51,13 @@ export function generateMountainSVG(
 
   return svg`
     <svg 
-      viewBox="0 0 500 300" 
+      viewBox="0 0 500 185" 
       xmlns="http://www.w3.org/2000/svg"
-      style="width: 100%; height: auto; max-height: 300px;"
+      style="width: 100%; height: auto; max-height: 185px;"
       role="img"
       aria-label="Mountain snow report visualization"
     >
-      <g id="Snowfall" transform="translate(2.000000, 81.000000)">
+      <g id="Snowfall" transform="translate(2.000000, 10.000000)">
         <path id="Page-1" d="M211.483865,16 L135.799805,164.239258 L347.929688,164.239258 L299.238237,99.3686221 L259.749149,138.857349 L257.167107,134.871781 L277.710029,114.708816 L211.483865,16 Z M212.359375,29.359375 L250.58604,87.463927 L229.37207,67.8369141 L225.604998,91.8886841 L214.416016,65.5478516 L205.131836,90.3828125 L197.766602,69.4726565 L187.387695,77.2480471 L212.359375,29.359375 Z" fill="${mountainColor}" transform="translate(241.864746, 90.119629) scale(-1, 1) translate(-241.864746, -90.119629) "></path>
         <path id="Line" d="M273.17481,18.5 L91.4057823,18.5" stroke="#999999" stroke-linecap="square"></path>
         <path id="Line-Copy-27" d="M204.999998,114.5 L91.4057823,114.5" stroke="#999999" stroke-linecap="square"></path>
