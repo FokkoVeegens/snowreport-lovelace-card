@@ -193,6 +193,44 @@ class SnowReportCard extends LitElement {
     return st.state;
   }
 
+  private _formatRelativeDate(timestamp: string | null): string {
+    if (!timestamp) return '';
+    
+    try {
+      // Parse the timestamp and normalize to midnight (ignore time component)
+      const date = new Date(timestamp);
+      const targetDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+      
+      // Get today at midnight
+      const now = new Date();
+      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      
+      // Calculate difference in days
+      const diffMs = today.getTime() - targetDate.getTime();
+      const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+      
+      if (diffDays === 0) {
+        return 'Today';
+      } else if (diffDays === 1) {
+        return 'Yesterday';
+      } else if (diffDays < 7) {
+        return `${diffDays} days ago`;
+      } else if (diffDays < 14) {
+        return 'About a week ago';
+      } else if (diffDays < 30) {
+        const weeks = Math.floor(diffDays / 7);
+        return `About ${weeks} weeks ago`;
+      } else if (diffDays < 60) {
+        return 'About a month ago';
+      } else {
+        const months = Math.floor(diffDays / 30);
+        return `About ${months} months ago`;
+      }
+    } catch (e) {
+      return '';
+    }
+  }
+
   render() {
     const cfg = this._config;
     if (!cfg) return html`<ha-card>Snow Report card: no configuration provided</ha-card>`;
@@ -209,31 +247,26 @@ class SnowReportCard extends LitElement {
       valleyElevation: valleyElevationRaw && !isNaN(Number(valleyElevationRaw)) ? Number(valleyElevationRaw) : null,
     };
 
-    // Determine last update text
+    // Determine last snowfall text (using relative date format)
     const lang = cfg.language || 'en';
     const lastUpdateKey = cfg.entities.last_update;
-    let lastUpdateText = localize('unavailable', lang);
+    let lastSnowfallDate: string | null = null;
     if (lastUpdateKey && this._hass && this._hass.states) {
       const st = this._hass.states[lastUpdateKey];
       if (st) {
-        const ts = st.last_changed || st.last_updated || st.attributes?.last_changed || null;
-        try {
-          lastUpdateText = ts ? new Date(ts).toLocaleString(undefined) : String(st.state ?? localize('unavailable', lang));
-        } catch (e) {
-          lastUpdateText = String(st.state ?? localize('unavailable', lang));
-        }
+        lastSnowfallDate = st.last_changed || st.last_updated || st.attributes?.last_changed || st.state || null;
       }
     } else if (this._hass && this._hass.states) {
       // fallback to mountain sensor's last_changed
       const fallback = cfg.entities.mountain_snow_depth;
       const st = fallback ? this._hass.states[fallback] : null;
       if (st) {
-        const ts = st.last_changed || st.last_updated || null;
-        try { lastUpdateText = ts ? new Date(ts).toLocaleString(undefined) : String(st.state ?? localize('unavailable', lang)); } catch (e) { lastUpdateText = String(st.state ?? localize('unavailable', lang)); }
+        lastSnowfallDate = st.last_changed || st.last_updated || null;
       }
     }
-
-    const lastUpdateLabel = localize('last_update', lang);
+    
+    const lastSnowfallText = this._formatRelativeDate(lastSnowfallDate) || localize('unavailable', lang);
+    const lastSnowfallLabel = localize('last_snowfall', lang);
 
     // Forecast display
     const showForecast = cfg.display_options?.show_forecast ?? true;
@@ -246,7 +279,6 @@ class SnowReportCard extends LitElement {
     return html`
       <ha-card class=${compact ? 'compact' : ''}>
         ${cfg.resort_name ? html`<div class="card-header">${cfg.resort_name}</div>` : ''}
-        <div class="last-update">${lastUpdateLabel}: ${lastUpdateText}</div>
         <div class="mountain-container">
           ${cfg.display_options?.show_mountain_graphic === false ? html`` : generateMountainSVG(cfg, data)}
         </div>
@@ -257,9 +289,10 @@ class SnowReportCard extends LitElement {
                 ${forecastMountain ? html`<div>${localize('mountain', lang)}: ${forecastMountain}${isNaN(Number(forecastMountain)) ? '' : 'cm'}</div>` : ''}
                 ${forecastValley ? html`<div>${localize('valley', lang)}: ${forecastValley}${isNaN(Number(forecastValley)) ? '' : 'cm'}</div>` : ''}
                 ${snowfall24 ? html`<div>${localize('snowfall_24h', lang)}: ${snowfall24}${isNaN(Number(snowfall24)) ? '' : 'cm'}</div>` : ''}
+                <div>${lastSnowfallLabel}: ${lastSnowfallText}</div>
               </div>
             `
-          : ''}
+          : html`<div class="forecast-section"><div>${lastSnowfallLabel}: ${lastSnowfallText}</div></div>`}
       </ha-card>
     `;
   }
