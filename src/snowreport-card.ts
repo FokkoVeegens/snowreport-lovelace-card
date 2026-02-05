@@ -294,9 +294,11 @@ class SnowReportCard extends LitElement {
         ${showForecast && (forecastMountain || forecastValley)
           ? html`
               <div class="forecast-section">
-                ${forecastMountain ? html`<div>${localize('mountain', lang)}: ${forecastMountain}${isNaN(Number(forecastMountain)) ? '' : 'cm'}</div>` : ''}
-                ${forecastValley ? html`<div>${localize('valley', lang)}: ${forecastValley}${isNaN(Number(forecastValley)) ? '' : 'cm'}</div>` : ''}
-                <div>${lastSnowfallLabel}: ${lastSnowfallText}</div>
+                <div>❄️ ${lastSnowfallLabel}: ${lastSnowfallText}</div>
+                <div class="combined-forecast">
+                  ❄️ 5d Forecast: 🏔️ ${forecastMountain && !isNaN(Number(forecastMountain)) ? forecastMountain + 'cm' : '-'} 🏘️ ${forecastValley && !isNaN(Number(forecastValley)) ? forecastValley + 'cm' : '-'}
+                </div>
+                
               </div>
             `
           : html`<div class="forecast-section"><div>${lastSnowfallLabel}: ${lastSnowfallText}</div></div>`}
