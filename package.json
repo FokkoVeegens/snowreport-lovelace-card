@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "lit": "^3.3.2",
-    "custom-card-helpers": "^1.5.0"
+    "custom-card-helpers": "^2.0.0"
   },
   "devDependencies": {
     "typescript": "^5.9.3",
