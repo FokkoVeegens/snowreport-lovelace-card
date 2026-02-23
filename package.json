@@ -24,7 +24,7 @@
     "@rollup/plugin-commonjs": "^29.0.0",
     "@rollup/plugin-terser": "^0.4.0",
     "@rollup/plugin-json": "^6.0.0",
-    "rollup-plugin-typescript2": "^0.34.1",
+    "rollup-plugin-typescript2": "^0.36.0",
     "rollup-plugin-serve": "^3.0.0",
     "rollup-plugin-livereload": "^2.0.0"
   }
