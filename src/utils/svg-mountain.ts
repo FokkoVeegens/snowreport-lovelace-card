@@ -23,31 +23,6 @@ export function generateMountainSVG(
   // Color customization from config or defaults
   const mountainColor = config.display_options?.mountain_color || '#D3D3D3';
   const snowColor = config.display_options?.snow_color || '#FFFFFF';
-  const lineColor = 'var(--primary-text-color, #000000)';
-  const textColor = 'var(--primary-text-color, #000000)';
-  
-  // Mountain peak position (top center)
-  const peakX = 250;
-  const peakY = 40;
-  
-  // Mountain base positions
-  const leftBaseX = 50;
-  const rightBaseX = 450;
-  const baseY = 280;
-  
-  // Valley data point position (left slope, lower third)
-  const valleyPointX = 140;
-  const valleyPointY = 200;
-  
-  // Mountain data point position (right slope, upper third)
-  const mountainPointX = 360;
-  const mountainPointY = 100;
-  
-  // Label positions (to the left of valley point, to the right of mountain point)
-  const valleyLabelX = 30;
-  const valleyLabelY = valleyPointY;
-  const mountainLabelX = 470;
-  const mountainLabelY = mountainPointY;
 
   return svg`
     <svg 

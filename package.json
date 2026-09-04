@@ -11,21 +11,34 @@
     "build": "rollup -c",
     "dev": "rollup -c --watch",
     "watch": "rollup -c --watch",
-    "lint": "eslint . --ext .ts,.js"
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "lit": "^3.3.2",
-    "custom-card-helpers": "^2.0.0"
+    "custom-card-helpers": "^2.0.0",
+    "lit": "^3.3.2"
   },
   "devDependencies": {
-    "typescript": "^5.9.3",
-    "rollup": "^4.59.0",
-    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@eslint/js": "^10.0.1",
     "@rollup/plugin-commonjs": "^29.0.0",
-    "@rollup/plugin-terser": "^1.0.0",
     "@rollup/plugin-json": "^6.0.0",
-    "rollup-plugin-typescript2": "^0.36.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-terser": "^1.0.0",
+    "@rollup/plugin-typescript": "^12.3.0",
+    "@typescript-eslint/eslint-plugin": "^8.69.0",
+    "@typescript-eslint/parser": "^8.69.0",
+    "@vitest/coverage-v8": "^5.0.0",
+    "eslint": "^10.10.0",
+    "globals": "^17.12.0",
+    "happy-dom": "^20.14.0",
+    "rollup": "^4.59.0",
+    "rollup-plugin-livereload": "^2.0.0",
     "rollup-plugin-serve": "^3.0.0",
-    "rollup-plugin-livereload": "^2.0.0"
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.69.0",
+    "vitest": "^5.0.0"
   }
 }

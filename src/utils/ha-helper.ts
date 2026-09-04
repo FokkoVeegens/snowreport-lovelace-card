@@ -1,5 +1,3 @@
-import { HomeAssistant } from 'custom-card-helpers';
-
 export function getEntityValue(hass: any, entityId?: string): number | null {
   if (!hass || !entityId) return null;
   const st = hass.states[entityId];
@@ -17,17 +15,17 @@ export function getEntityLastUpdated(hass: any, entityId?: string): string | nul
   const ts = st.last_changed || st.last_updated || null;
   try {
     return ts ? new Date(ts).toLocaleString(undefined) : null;
-  } catch (e) {
+  } catch {
     return String(st.state ?? null);
   }
 }
 
-export function formatSnowDepth(value: number | null, locale?: string): string {
+export function formatSnowDepth(value: number | null, _locale?: string): string {
   if (value === null || value === undefined) return '—';
   return `${value}cm`;
 }
 
-export function formatElevation(value: number | null, locale?: string): string {
+export function formatElevation(value: number | null, _locale?: string): string {
   if (value === null || value === undefined) return '—';
   return `${value}m`;
 }

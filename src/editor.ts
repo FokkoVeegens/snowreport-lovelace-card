@@ -39,6 +39,7 @@ class SnowReportCardEditor extends LitElement {
         compact_mode: false,
       };
     }
+    this.requestUpdate();
   }
 
   private _valueChanged(ev: CustomEvent) {

@@ -199,6 +199,7 @@ class SnowReportCard extends LitElement {
     try {
       // Parse the timestamp and normalize to midnight (ignore time component)
       const date = new Date(timestamp);
+      if (isNaN(date.getTime())) return '';
       const targetDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
       
       // Get today at midnight
@@ -226,7 +227,7 @@ class SnowReportCard extends LitElement {
         const months = Math.floor(diffDays / 30);
         return localize('about_months_ago', lang).replace('{n}', months.toString());
       }
-    } catch (e) {
+    } catch {
       return '';
     }
   }
