@@ -7,6 +7,9 @@
   "license": "GPL-3.0-only",
   "main": "dist/snowreport-card.js",
   "module": "dist/snowreport-card.js",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c --watch",
